@@ -1,6 +1,6 @@
-package com.example.github_profile_repo_search
+package com.example.github_profile_repo_search.data.dto
 
-data class UsersResponseItem(
+data class Owner(
     val avatar_url: String,
     val events_url: String,
     val followers_url: String,

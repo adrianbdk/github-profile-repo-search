@@ -1,6 +1,6 @@
 package com.example.github_profile_repo_search.api
 
-import com.example.github_profile_repo_search.UsersResponse
+import com.example.github_profile_repo_search.data.dto.UsersResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
