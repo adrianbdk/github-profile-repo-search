@@ -1,3 +1,3 @@
 package com.example.github_profile_repo_search.data.dto
 
-class UsersResponse : ArrayList<UsersResponseItem>()
+class UsersResponse : ArrayList<UserDto>()

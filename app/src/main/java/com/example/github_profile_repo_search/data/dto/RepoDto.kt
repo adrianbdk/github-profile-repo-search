@@ -1,5 +1,7 @@
 package com.example.github_profile_repo_search.data.dto
 
+import com.example.github_profile_repo_search.domain.model.Repo
+
 data class RepoDto(
     val allow_forking: Boolean,
     val archive_url: String,
@@ -57,7 +59,7 @@ data class RepoDto(
     val notifications_url: String,
     val open_issues: Int,
     val open_issues_count: Int,
-    val owner: Owner,
+    val owner: UserDto,
     val `private`: Boolean,
     val pulls_url: String,
     val pushed_at: String,
@@ -82,3 +84,9 @@ data class RepoDto(
     val watchers: Int,
     val watchers_count: Int
 )
+
+fun RepoDto.toRepo(): Repo {
+    return Repo(
+        name = name,
+    )
+}

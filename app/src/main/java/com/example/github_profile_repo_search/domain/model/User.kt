@@ -1,4 +1,5 @@
 package com.example.github_profile_repo_search.domain.model
 
-class User {
-}
+data class User (
+    val login: String = ""
+)

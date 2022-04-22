@@ -1,6 +1,9 @@
 package com.example.github_profile_repo_search.data.dto
 
-data class Owner(
+import com.example.github_profile_repo_search.domain.model.Repo
+import com.example.github_profile_repo_search.domain.model.User
+
+data class UserDto(
     val avatar_url: String,
     val events_url: String,
     val followers_url: String,
@@ -20,3 +23,9 @@ data class Owner(
     val type: String,
     val url: String
 )
+
+fun UserDto.toUser(): User {
+    return User(
+        login = login,
+    )
+}
