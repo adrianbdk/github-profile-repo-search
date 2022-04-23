@@ -1,11 +1,7 @@
 package com.example.github_profile_repo_search.domain.repository
 
-import com.example.github_profile_repo_search.api.RetrofitInstance
+import com.example.github_profile_repo_search.data.dto.UserDto
 
-class UsersRepository {
-    suspend fun getAllUsers(pageNumber: Int) =
-        RetrofitInstance.api.getUsers(pageNumber)
-
-    suspend fun searchUsers(searchQuery: String, pageNumber: Int) =
-        RetrofitInstance.api.searchForUsers(searchQuery, pageNumber)
+interface UsersRepository {
+    suspend fun searchForUsers(username: String, pageNumber: Int): List<UserDto>
 }

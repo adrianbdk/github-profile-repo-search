@@ -1,6 +1,5 @@
 package com.example.github_profile_repo_search.data.dto
 
-import com.example.github_profile_repo_search.domain.model.Repo
 import com.example.github_profile_repo_search.domain.model.User
 
 data class UserDto(
