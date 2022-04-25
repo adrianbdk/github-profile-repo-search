@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">github-profile-repo-search</string>
+    <string name="language_example">Kotlin</string>
+    <string name="bytes_example">123123</string>
+    <string name="title_example">TITLE</string>
+    <string name="owner_title">Owner:</string>
+    <string name="owner_content_example">username</string>
+    <string name="created_at_title">Created at:</string>
+    <string name="created_at_content_example">01.01.2001</string>
+    <string name="languages_header_title">Languages</string>
+    <string name="bytes_header_title">Bytes</string>
+    <string name="repo_name_example">text</string>
+    <string name="text_input_hint">GitHub username</string>
+    <string name="search_button_text">Search</string>
 </resources>

@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:paddingVertical="8dp"
-        android:text="Kotlin"
+        android:text="@string/language_example"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent" />
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:paddingVertical="8dp"
-        android:text="123123"
+        android:text="@string/bytes_example"
         android:textSize="18sp"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.appcompat.widget.LinearLayoutCompat>

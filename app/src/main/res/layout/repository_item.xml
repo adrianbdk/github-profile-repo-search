@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:paddingHorizontal="24dp"
             android:paddingVertical="18dp"
-            android:text="text"
+            android:text="@string/repo_name_example"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             app:layout_constraintTop_toTopOf="parent" />
     </com.google.android.material.card.MaterialCardView>
