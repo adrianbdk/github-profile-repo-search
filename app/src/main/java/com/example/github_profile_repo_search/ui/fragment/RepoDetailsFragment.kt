@@ -4,22 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.github_profile_repo_search.R
 import com.example.github_profile_repo_search.databinding.RepositoryDetailsBinding
-import com.example.github_profile_repo_search.databinding.SearchFragmentBinding
 import com.example.github_profile_repo_search.domain.model.Repo
+import com.example.github_profile_repo_search.ui.adapters.RepoLanguagesAdapter
 import com.example.github_profile_repo_search.ui.adapters.RepoListAdapter
-import com.example.github_profile_repo_search.ui.util.RepoListState
+import com.example.github_profile_repo_search.ui.util.RepoLanguagesState
 import com.example.github_profile_repo_search.ui.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.time.ZoneId
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 
 @AndroidEntryPoint
@@ -43,19 +43,30 @@ class RepoDetailsFragment : Fragment(R.layout.repository_details) {
         super.onActivityCreated(savedInstanceState)
 
         val selectedRepoObserver = Observer<Repo> { repo ->
+            val date = repo.created_at
+            val dateTime: ZonedDateTime = ZonedDateTime.parse(date)
+            val formattedDate: String = dateTime.withZoneSameInstant(ZoneId.of("UTC"))
+                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
             binding.tvTitle.text = repo.name
             binding.tvOwner.text = repo.owner
-            binding.tvCreatedAt.text = repo.created_at
+            binding.tvCreatedAt.text = formattedDate
+
+            viewModel.getLanguagesDataRepo(repo.owner, repo.name)
         }
 
+        val languagesObserver = Observer<RepoLanguagesState> { languages ->
+
+            val linearLayoutManager = LinearLayoutManager(context)
+            val repoLanguagesAdapter = RepoLanguagesAdapter(languages.languageList)
+
+            binding.rvRepoLanguages.apply {
+                layoutManager = linearLayoutManager
+                adapter = repoLanguagesAdapter
+            }
+        }
+
+        viewModel.stateLanguageRepo.observe(viewLifecycleOwner, languagesObserver)
         viewModel.selectedRepo.observe(viewLifecycleOwner, selectedRepoObserver)
-
-        val languagesObserver = Observer<ConcurrentHashMap<String, Int>> { languages ->
-            viewModel.selectRepoLanguages(languages)
-        }
-
-        viewModel.selectedRepoLanguages.observe(viewLifecycleOwner, languagesObserver)
-
     }
 
 }

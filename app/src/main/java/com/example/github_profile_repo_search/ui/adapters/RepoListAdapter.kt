@@ -4,6 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.github_profile_repo_search.R
+import com.example.github_profile_repo_search.databinding.LanguageItemBinding
+import com.example.github_profile_repo_search.databinding.RepositoryItemBinding
 import com.example.github_profile_repo_search.domain.model.Repo
 import com.example.github_profile_repo_search.ui.viewholder.RepoItemViewHolder
 
@@ -14,9 +16,9 @@ class RepoListAdapter(
 ) : RecyclerView.Adapter<RepoItemViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepoItemViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.repository_item, parent, false)
-        return RepoItemViewHolder(view, onClick)
+        val binding =
+            RepositoryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return RepoItemViewHolder(binding, onClick)
     }
 
     override fun getItemCount(): Int {

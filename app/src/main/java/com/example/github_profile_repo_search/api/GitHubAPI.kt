@@ -25,9 +25,9 @@ interface GitHubAPI {
 
     @GET("repos/{username}/{repo}/languages")
     suspend fun getLanguagesDataRepo(
-        @Query("username")
+        @Path("username")
         username: String,
-        @Query("repo")
+        @Path("repo")
         repo: String,
     ): ConcurrentHashMap<String, Int>
 }
