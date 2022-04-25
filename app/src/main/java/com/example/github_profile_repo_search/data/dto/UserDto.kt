@@ -25,6 +25,8 @@ data class UserDto(
 
 fun UserDto.toUser(): User {
     return User(
+        avatar_url = avatar_url,
         login = login,
+        url = url,
     )
 }

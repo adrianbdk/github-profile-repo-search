@@ -21,7 +21,6 @@ object AppModule {
 
     @Provides
     @Singleton
-    @Named("GitHubAPI")
     fun provideGitHubAPI(): GitHubAPI {
         return Retrofit.Builder()
             .baseUrl(Constants.BASE_URL)
@@ -30,15 +29,11 @@ object AppModule {
             .create(GitHubAPI::class.java)
     }
     @Provides
-    @Singleton
-    @Named("RepoRepository")
     fun provideRepoRepository(api: GitHubAPI): RepoRepository{
         return RepoRepositoryImplementation(api);
     }
 
     @Provides
-    @Singleton
-    @Named("UsersRepository")
     fun provideUsersRepository(api: GitHubAPI): UsersRepository {
         return UsersRepositoryImplementation(api);
     }

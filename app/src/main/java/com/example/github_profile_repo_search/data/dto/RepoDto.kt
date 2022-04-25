@@ -88,5 +88,8 @@ data class RepoDto(
 fun RepoDto.toRepo(): Repo {
     return Repo(
         name = name,
+        html_url = html_url,
+        owner = owner.login,
+        created_at = created_at
     )
 }

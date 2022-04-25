@@ -5,6 +5,7 @@ import com.example.github_profile_repo_search.data.dto.UserDto
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
+import java.util.concurrent.ConcurrentHashMap
 
 interface GitHubAPI {
 
@@ -21,4 +22,12 @@ interface GitHubAPI {
         @Path("username") username: String,
         @Query("per_page") perPage: Int
     ): List<RepoDto>
+
+    @GET("repos/{username}/{repo}/languages")
+    suspend fun getLanguagesDataRepo(
+        @Query("username")
+        username: String,
+        @Query("repo")
+        repo: String,
+    ): ConcurrentHashMap<String, Int>
 }
