@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.*
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -41,10 +42,9 @@ class SearchFragment : Fragment(R.layout.search_fragment) {
 
         val reposObserver = Observer<RepoListState> { repos ->
             val linearLayoutManager = LinearLayoutManager(context)
-            val dividerItemDecoration = DividerItemDecoration(
-                binding.rvRepoList.context,
-                linearLayoutManager.orientation
-            )
+
+            binding.progressIndicator.visibility = if(repos.isLoading) VISIBLE else GONE
+
             val repoListAdapter = RepoListAdapter(repos.reposList) { repo ->
                 viewModel.selectRepo(repo)
                 this.findNavController().navigate(R.id.action_searchFragment_to_repoDetailsFragment)
@@ -52,7 +52,6 @@ class SearchFragment : Fragment(R.layout.search_fragment) {
             binding.rvRepoList.apply{
                 layoutManager = linearLayoutManager
                 adapter = repoListAdapter
-                addItemDecoration(dividerItemDecoration)
             }
         }
 
