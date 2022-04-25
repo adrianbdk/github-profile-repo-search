@@ -22,34 +22,33 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SearchFragment : Fragment(R.layout.search_fragment) {
+
     private val viewModel by activityViewModels<MainViewModel>()
-    private lateinit var repoListAdapter: RepoListAdapter
     private lateinit var binding: SearchFragmentBinding
-    val TAG = "SearchNewsFragment"
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = SearchFragmentBinding.inflate(
-            inflater, container, false)
-
+        binding = SearchFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         val reposObserver = Observer<RepoListState> { repos ->
             val linearLayoutManager = LinearLayoutManager(context)
 
-            binding.progressIndicator.visibility = if(repos.isLoading) VISIBLE else GONE
+            binding.progressIndicator.visibility = if (repos.isLoading) VISIBLE else GONE
 
             val repoListAdapter = RepoListAdapter(repos.reposList) { repo ->
                 viewModel.selectRepo(repo)
                 this.findNavController().navigate(R.id.action_searchFragment_to_repoDetailsFragment)
             }
-            binding.rvRepoList.apply{
+
+            binding.rvRepoList.apply {
                 layoutManager = linearLayoutManager
                 adapter = repoListAdapter
             }
@@ -57,10 +56,12 @@ class SearchFragment : Fragment(R.layout.search_fragment) {
 
         viewModel.stateRepo.observe(viewLifecycleOwner, reposObserver)
 
-
         binding.Button.setOnClickListener {
-            viewModel.getAllUserRepos(binding.inputEditText.text.toString(), 100)
+            viewModel.getAllUserRepos(binding.inputEditText.text.toString(), PER_PAGE)
         }
     }
 
+    companion object {
+        private const val PER_PAGE = 100
+    }
 }

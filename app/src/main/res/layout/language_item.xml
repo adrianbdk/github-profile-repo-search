@@ -24,4 +24,5 @@
         android:text="@string/bytes_example"
         android:textSize="18sp"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.appcompat.widget.LinearLayoutCompat>

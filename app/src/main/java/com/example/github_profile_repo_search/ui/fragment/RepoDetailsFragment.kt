@@ -24,32 +24,26 @@ import java.util.concurrent.ConcurrentHashMap
 
 @AndroidEntryPoint
 class RepoDetailsFragment : Fragment(R.layout.repository_details) {
+
     private val viewModel by activityViewModels<MainViewModel>()
-    private lateinit var repoListAdapter: RepoListAdapter
     private lateinit var binding: RepositoryDetailsBinding
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = RepositoryDetailsBinding.inflate(
-            inflater, container, false
-        )
-
+        binding = RepositoryDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         val selectedRepoObserver = Observer<Repo> { repo ->
-            val date = repo.created_at
-            val dateTime: ZonedDateTime = ZonedDateTime.parse(date)
-            val formattedDate: String = dateTime.withZoneSameInstant(ZoneId.of("UTC"))
-                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
             binding.tvTitle.text = repo.name
             binding.tvOwner.text = repo.owner
-            binding.tvCreatedAt.text = formattedDate
+            binding.tvCreatedAt.text = repo.created_at.toDate()
 
             viewModel.getLanguagesDataRepo(repo.owner, repo.name)
         }
@@ -69,4 +63,8 @@ class RepoDetailsFragment : Fragment(R.layout.repository_details) {
         viewModel.selectedRepo.observe(viewLifecycleOwner, selectedRepoObserver)
     }
 
+    private fun String.toDate(): String = ZonedDateTime
+        .parse(this)
+        .withZoneSameInstant(ZoneId.of("UTC"))
+        .format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
 }

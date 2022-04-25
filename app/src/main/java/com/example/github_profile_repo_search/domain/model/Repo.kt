@@ -5,5 +5,4 @@ data class Repo(
     val html_url: String = "",
     val owner: String = "",
     val created_at: String = ""
-
 )

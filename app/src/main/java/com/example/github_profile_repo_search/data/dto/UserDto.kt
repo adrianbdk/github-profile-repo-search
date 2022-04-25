@@ -1,6 +1,5 @@
 package com.example.github_profile_repo_search.data.dto
 
-import com.example.github_profile_repo_search.domain.model.User
 
 data class UserDto(
     val avatar_url: String,
@@ -22,11 +21,3 @@ data class UserDto(
     val type: String,
     val url: String
 )
-
-fun UserDto.toUser(): User {
-    return User(
-        avatar_url = avatar_url,
-        login = login,
-        url = url,
-    )
-}

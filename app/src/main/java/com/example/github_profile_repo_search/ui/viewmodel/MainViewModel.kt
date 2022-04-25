@@ -13,9 +13,9 @@ import com.example.github_profile_repo_search.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 import java.util.concurrent.ConcurrentHashMap
 import javax.inject.Inject
+
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val getAllReposFromUserUseCase: GetAllReposFromUserUseCase,
@@ -23,17 +23,16 @@ class MainViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _stateRepo = MutableLiveData(RepoListState())
-    val stateRepo: LiveData<RepoListState> = _stateRepo
-
     private val _stateLanguageRepo = MutableLiveData(RepoLanguagesState())
+    private var _selectedRepo = MutableLiveData(Repo())
+
+    val stateRepo: LiveData<RepoListState> = _stateRepo
     val stateLanguageRepo: LiveData<RepoLanguagesState> = _stateLanguageRepo
+    val selectedRepo: LiveData<Repo> = _selectedRepo
 
-    var selectedRepo = MutableLiveData(Repo())
-
-    fun selectRepo(repo: Repo){
-        selectedRepo.postValue(repo)
+    fun selectRepo(repo: Repo) {
+        _selectedRepo.postValue(repo)
     }
-
 
     fun getAllUserRepos(username: String, perPage: Int) {
         getAllReposFromUserUseCase(username, perPage).onEach { result ->
@@ -57,7 +56,10 @@ class MainViewModel @Inject constructor(
         getLanguagesDataRepoUseCase(username, repo).onEach { result ->
             when (result) {
                 is Resource.Success -> {
-                    _stateLanguageRepo.value = RepoLanguagesState(languageList = result.data ?: emptyMap<String, Int>() as ConcurrentHashMap<String, Int>)
+                    _stateLanguageRepo.value = RepoLanguagesState(
+                        languageList = result.data
+                            ?: emptyMap<String, Int>() as ConcurrentHashMap<String, Int>
+                    )
                 }
                 is Resource.Error -> {
                     _stateLanguageRepo.value = RepoLanguagesState(

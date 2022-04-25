@@ -6,5 +6,4 @@ import java.util.concurrent.ConcurrentHashMap
 interface RepoRepository {
     suspend fun getAllUserRepos(username: String, pageNumber: Int): List<RepoDto>
     suspend fun getLanguagesDataRepo(username: String, repo: String): ConcurrentHashMap<String, Int>
-
 }

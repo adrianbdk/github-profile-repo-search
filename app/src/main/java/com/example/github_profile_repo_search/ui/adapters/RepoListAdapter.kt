@@ -21,12 +21,8 @@ class RepoListAdapter(
         return RepoItemViewHolder(binding, onClick)
     }
 
-    override fun getItemCount(): Int {
-        return dataSet.size
-    }
+    override fun getItemCount() = dataSet.size
 
-    override fun onBindViewHolder(holder: RepoItemViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RepoItemViewHolder, position: Int) =
         holder.bind(dataSet[position])
-    }
-
 }

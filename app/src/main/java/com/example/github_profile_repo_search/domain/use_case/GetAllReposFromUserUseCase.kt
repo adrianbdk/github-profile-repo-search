@@ -15,13 +15,16 @@ class GetAllReposFromUserUseCase @Inject constructor(
 ) {
 
     operator fun invoke(username: String, pageNumber: Int): Flow<Resource<List<Repo>>> = flow {
-        try{
+        try {
             emit(Resource.Loading<List<Repo>>())
             val repos = repository.getAllUserRepos(username, pageNumber).map { it.toRepo() }
             emit(Resource.Success<List<Repo>>(repos))
-        } catch(e: HttpException) {
-            emit(Resource.Error<List<Repo>>(e.localizedMessage ?: "An unexpected error has occurred"))
-        } catch(e: IOException) {
+        } catch (e: HttpException) {
+            emit(Resource.Error<List<Repo>>(
+                    e.localizedMessage ?: "An unexpected error has occurred"
+                )
+            )
+        } catch (e: IOException) {
             emit(Resource.Error<List<Repo>>("Couldn't reach the server"))
         }
     }

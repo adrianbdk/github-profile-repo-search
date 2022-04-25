@@ -15,14 +15,20 @@ class GetLanguagesDataRepoUseCase @Inject constructor(
     private val repository: RepoRepository
 ) {
 
-    operator fun invoke(username: String, repo: String): Flow<Resource<ConcurrentHashMap<String, Int>>> = flow {
-        try{
+    operator fun invoke(
+        username: String,
+        repo: String
+    ): Flow<Resource<ConcurrentHashMap<String, Int>>> = flow {
+        try {
             emit(Resource.Loading<ConcurrentHashMap<String, Int>>())
             val languages = repository.getLanguagesDataRepo(username, repo)
             emit(Resource.Success<ConcurrentHashMap<String, Int>>(languages))
-        } catch(e: HttpException) {
-            emit(Resource.Error<ConcurrentHashMap<String, Int>>(e.localizedMessage ?: "An unexpected error has occurred"))
-        } catch(e: IOException) {
+        } catch (e: HttpException) {
+            emit(Resource.Error<ConcurrentHashMap<String, Int>>(
+                    e.localizedMessage ?: "An unexpected error has occurred"
+                )
+            )
+        } catch (e: IOException) {
             emit(Resource.Error<ConcurrentHashMap<String, Int>>("Couldn't reach the server"))
         }
     }

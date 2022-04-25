@@ -2,9 +2,7 @@ package com.example.github_profile_repo_search.di
 
 import com.example.github_profile_repo_search.api.GitHubAPI
 import com.example.github_profile_repo_search.data.repository.RepoRepositoryImplementation
-import com.example.github_profile_repo_search.data.repository.UsersRepositoryImplementation
 import com.example.github_profile_repo_search.domain.repository.RepoRepository
-import com.example.github_profile_repo_search.domain.repository.UsersRepository
 import com.example.github_profile_repo_search.util.Constants
 import dagger.Module
 import dagger.Provides
@@ -28,14 +26,10 @@ object AppModule {
             .build()
             .create(GitHubAPI::class.java)
     }
-    @Provides
-    fun provideRepoRepository(api: GitHubAPI): RepoRepository{
-        return RepoRepositoryImplementation(api);
-    }
 
     @Provides
-    fun provideUsersRepository(api: GitHubAPI): UsersRepository {
-        return UsersRepositoryImplementation(api);
+    fun provideRepoRepository(api: GitHubAPI): RepoRepository {
+        return RepoRepositoryImplementation(api);
     }
 
 }

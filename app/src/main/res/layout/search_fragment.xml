@@ -9,38 +9,39 @@
         android:id="@+id/searchLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         android:layout_marginHorizontal="8dp"
-        android:layout_marginTop="16dp">
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/InputLayout"
-        android:layout_weight="3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/text_input_hint"
-        app:endIconMode="clear_text"
-        app:layout_constraintEnd_toStartOf="@id/Button"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/inputEditText"
-            android:layout_width="match_parent"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/InputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:imeOptions="actionSend"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_weight="3"
+            android:hint="@string/text_input_hint"
+            app:endIconMode="clear_text"
+            app:layout_constraintEnd_toStartOf="@id/Button">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/Button"
-        android:layout_weight="1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/search_button_text"
-        app:layout_constraintBottom_toTopOf="@id/rvRepoList"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/InputLayout"
-        app:layout_constraintTop_toTopOf="parent"
-        style="@style/Widget.MaterialComponents.Button.TextButton"/>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionSend" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/Button"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/search_button_text"
+            app:layout_constraintBottom_toTopOf="@id/rvRepoList"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/InputLayout"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </LinearLayout>
 
@@ -58,10 +59,10 @@
         android:id="@+id/progressIndicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/searchLayout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:indeterminate="true"
-        android:visibility="invisible"/>
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

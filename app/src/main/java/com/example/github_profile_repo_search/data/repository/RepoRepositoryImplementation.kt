@@ -14,7 +14,10 @@ class RepoRepositoryImplementation @Inject constructor(
         return api.getAllUserRepos(username, pageNumber)
     }
 
-    override suspend fun getLanguagesDataRepo(username: String, repo: String): ConcurrentHashMap<String, Int> {
+    override suspend fun getLanguagesDataRepo(
+        username: String,
+        repo: String
+    ): ConcurrentHashMap<String, Int> {
         return api.getLanguagesDataRepo(username, repo)
     }
 }
