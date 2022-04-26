@@ -1,4 +1,7 @@
-# github-profile-repo-search
+# Allegro Summer e-Xperience 2022 
+Mail użyty w procesie rekturacji: <b>adrian.budka134@gmail.com</b> <br />
+Zadanie <b>nr. 1</b> Mobile Software Engineer
+
 # Uruchomienie aplikacji
 Zainstalować aplikację z załączonego w repozytorium pliku .apk
 
